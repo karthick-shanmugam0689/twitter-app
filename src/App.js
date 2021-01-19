@@ -10,7 +10,6 @@ import TwitterContainer from "./container/TwitterContainer/TwitterContainer";
 import { useDarkMode } from "./utils/hooks/useTheme";
 import { AppContainer } from "./App.styles.js";
 import { lightTheme, darkTheme } from "./theme";
-import { tweets } from "./dataSource";
 
 // Add global styles
 const GlobalStyle = createGlobalStyle`
