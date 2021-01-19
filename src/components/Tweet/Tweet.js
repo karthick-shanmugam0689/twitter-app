@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import Image from "react-bootstrap/Image";
 import Media from "react-bootstrap/Media";
 
-import { TweetContainer } from "./Tweet.styles";
-
-import PersonImage from "../../images/person.svg";
 import LikeContainer from "../LikeContainer/LikeContainer";
+import PersonImage from "../../images/person.svg";
+
+import { TweetContainer } from "./Tweet.styles";
 
 const Tweet = ({
   account,
@@ -42,12 +43,12 @@ const Tweet = ({
 
 Tweet.propTypes = {
   account: PropTypes.string.isRequired,
-  timestamp: PropTypes.any,
   content: PropTypes.string.isRequired,
-  isLiked: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  handleLikePost: PropTypes.func.isRequired,
   relativeDiff: PropTypes.string.isRequired,
+  timestamp: PropTypes.any,
+  isLiked: PropTypes.bool,
+  handleLikePost: PropTypes.func.isRequired,
 };
 
 export default Tweet;

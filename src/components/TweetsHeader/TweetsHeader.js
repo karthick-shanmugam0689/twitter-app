@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import Form from "react-bootstrap/Form";
-import { Header } from "./TweetsHeader.styles";
 import Button from "react-bootstrap/Button";
+
 import { getTweetCountText } from "../../utils/genericUtils";
+
+import { Header } from "./TweetsHeader.styles";
+
 
 const TweetsHeader = ({
   tweetsLength = 0,
@@ -52,10 +56,10 @@ const TweetsHeader = ({
 
 TweetsHeader.propTypes = {
   likedTweetsLength: PropTypes.number,
-  handleShowLikedTweets: PropTypes.func.isRequired,
   showLikedTweets: PropTypes.bool,
-  handleClearTweets: PropTypes.func.isRequired,
   tweetsLength: PropTypes.number,
+  handleClearTweets: PropTypes.func.isRequired,
+  handleShowLikedTweets: PropTypes.func.isRequired,
 };
 
 export default TweetsHeader;

@@ -1,7 +1,8 @@
 import React from "react";
-import { LikeElement } from "./LikeContainer.styles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+
+import { LikeElement } from "./LikeContainer.styles";
 
 const LikeContainer = ({ handleLikePost, isLiked }) => {
   return (

@@ -1,8 +1,10 @@
+import { CLEAR_TWEETS, LIKE_TWEET, SET_ERROR, SET_TWEETS } from "./constants";
 import { getRelativeTimeDiff } from "../../utils/dateUtils";
-import { CLEAR_TWEETS, LIKE_TWEET, SET_TWEETS } from "./constants";
 
 const initialState = {
   tweets: [],
+  isInError: false,
+  errorMessage: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +13,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         tweets: getTweetsToShow(state.tweets, action.tweet),
+        isInError: false,
+        errorMessage: '',
       };
     case CLEAR_TWEETS:
       return {
@@ -27,6 +31,12 @@ const reducer = (state = initialState, action) => {
             (eachTweet.id !== action.id && eachTweet.isLiked),
         })),
       };
+    case SET_ERROR:
+      return {
+        ...state,
+        isInError: action.error,
+        errorMessage: action.errorMessage,
+      }
     default:
       return state;
   }

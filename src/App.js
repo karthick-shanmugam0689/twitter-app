@@ -1,15 +1,16 @@
 import React, { useMemo } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
+
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 
 import store from "./store.js";
 import TwitterContainer from "./container/TwitterContainer/TwitterContainer";
 
+import { lightTheme, darkTheme } from "./theme";
 import { useDarkMode } from "./utils/hooks/useTheme";
 import { AppContainer } from "./App.styles.js";
-import { lightTheme, darkTheme } from "./theme";
 
 // Add global styles
 const GlobalStyle = createGlobalStyle`

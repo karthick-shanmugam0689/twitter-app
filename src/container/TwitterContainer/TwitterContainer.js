@@ -4,14 +4,18 @@ import { connect } from "react-redux";
 
 import { getTweets, clearTweets, likeTweet } from "./action";
 import Tweet from "../../components/Tweet/Tweet";
-import { TweetsContainer } from "./TwitterContainer.styles";
 import TweetsHeader from "../../components/TweetsHeader/TweetsHeader";
+
+import { TweetsContainer } from "./TwitterContainer.styles";
+import { TweetContainer } from "../../components/Tweet/Tweet.styles";
 
 const TwitterContainer = ({
   tweets,
   getTweetsForMe,
   clearTweetsForMe,
   likeTweetForMe,
+  isInError,
+  errorMessage,
 }) => {
   const [showLikedTweets, setShowLikedTweets] = useState(false);
 
@@ -46,6 +50,14 @@ const TwitterContainer = ({
     () => tweets && tweets.filter((eachTweet) => eachTweet.isLiked).length,
     [tweets]
   );
+
+  if(isInError) {
+    return (
+      <TweetContainer>
+        {errorMessage}
+      </TweetContainer>
+    )
+  }
 
   return (
     <TweetsContainer>
@@ -87,6 +99,8 @@ TwitterContainer.propTypes = {
       relativeDiff: PropTypes.string,
     })
   ),
+  isInError: PropTypes.bool,
+  errorMessage: PropTypes.string,
   getTweetsForMe: PropTypes.func,
   clearTweetsForMe: PropTypes.func,
 };

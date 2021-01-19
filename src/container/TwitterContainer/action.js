@@ -1,13 +1,21 @@
-import { SET_TWEETS, CLEAR_TWEETS, LIKE_TWEET } from "./constants";
+import { SET_TWEETS, CLEAR_TWEETS, LIKE_TWEET, SET_ERROR } from "./constants";
 import { tweets } from "../../dataSource";
 
 export const getTweets = () => (dispatch) => {
-  tweets.subscribe((tweet) =>
+  try {
+    tweets.subscribe((tweet) =>
+      dispatch({
+        type: SET_TWEETS,
+        tweet,
+      })
+    );
+  } catch (ex) {
     dispatch({
-      type: SET_TWEETS,
-      tweet,
+      type: SET_ERROR,
+      isInError: true,
+      errorMessage: 'Some error occured. Please try again'
     })
-  );
+  }
 };
 
 export const clearTweets = () => (dispatch) => {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import LoveReaction from "../../images/love_icon_reaction.svg";
 
 export const LikeElement = styled.div`
