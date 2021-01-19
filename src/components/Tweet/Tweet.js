@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import Image from "react-bootstrap/Image";
@@ -51,4 +51,4 @@ Tweet.propTypes = {
   handleLikePost: PropTypes.func.isRequired,
 };
 
-export default Tweet;
+export default memo(Tweet);

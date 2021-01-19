@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
@@ -20,4 +20,4 @@ LikeContainer.propTypes = {
   handleLikePost: PropTypes.func.isRequired,
 };
 
-export default LikeContainer;
+export default memo(LikeContainer);

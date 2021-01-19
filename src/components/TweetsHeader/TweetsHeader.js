@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
@@ -62,4 +62,4 @@ TweetsHeader.propTypes = {
   handleShowLikedTweets: PropTypes.func.isRequired,
 };
 
-export default TweetsHeader;
+export default memo(TweetsHeader);
