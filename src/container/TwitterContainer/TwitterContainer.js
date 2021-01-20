@@ -1,6 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  List,
+  WindowScroller
+} from 'react-virtualized'
 
 import { getTweets, clearTweets, likeTweet } from "./action";
 import Tweet from "../../components/Tweet/Tweet";
@@ -51,6 +58,36 @@ const TwitterContainer = ({
     [tweets]
   );
 
+  const renderCache = useMemo(
+    () => new CellMeasurerCache({ defaultHeight: 80, fixedWidth: true }),
+    []
+  );
+
+  const renderRow = useCallback(
+    ({ index, key, parent, style }) => {
+      const eachTweet = tweetsToShow[index]
+      return (
+        <CellMeasurer
+          cache={renderCache}
+          columnIndex={0}
+          key={key}
+          rowIndex={index}
+          parent={parent}>
+          {() => (
+            <div style={style} className="row">
+              <Tweet
+                {...eachTweet}
+                handleLikePost={handleLikePost}
+                key={eachTweet.id}
+              />
+            </div>
+          )}
+        </CellMeasurer>
+      )
+    },
+    [tweetsToShow, renderCache, handleLikePost]
+  )
+
   if(isInError) {
     return (
       <TweetContainer>
@@ -68,14 +105,26 @@ const TwitterContainer = ({
         showLikedTweets={showLikedTweets}
         likedTweetsLength={likedTweetsLength}
       />
-      {tweetsToShow &&
-        tweetsToShow.map((eachTweet) => (
-          <Tweet
-            {...eachTweet}
-            handleLikePost={handleLikePost}
-            key={eachTweet.id}
-          />
-        ))}
+      <WindowScroller>
+        {({ height, isScrolling, scrollTop }) => (
+          <AutoSizer disableHeight={true}>
+            {({ width }) => (
+              <List
+                autoHeight={true}
+                deferredMeasurementCache={renderCache}
+                height={height}
+                isScrolling={isScrolling}
+                overscanRowCount={500}
+                rowHeight={renderCache.rowHeight}
+                rowRenderer={renderRow}
+                rowCount={tweetsToShow.length}
+                scrollTop={scrollTop}
+                width={width}
+              />
+            )}
+          </AutoSizer>
+        )}
+      </WindowScroller>
       {tweetsToShow && !tweetsToShow.length && (
         <>
           {tweets && tweets.length ? (

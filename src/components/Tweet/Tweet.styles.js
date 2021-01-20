@@ -12,7 +12,7 @@ export const TweetContainer = styled.div`
   box-shadow: 0 1px 3px ${(props) => props.theme.tweetBox};
   margin: 10px auto;
   padding: 1rem;
-  max-width: 30rem;
+  width: 30rem;
   text-align: left;
 
   img.avatar {
